@@ -88,7 +88,7 @@ def search_data(search_term, collection_name, limit=3):
 # if __name__ == "__main__":
 # example usage
 # before using : docker compose up -d
-# insert_data("test", "data representation", "data to be embeded")
+# insert_data("test",[ "data representation"],[ "data to be embeded"])
 # s = search_data(" BCNGarden project", "articles")
 # for i in s:  # type: ignore
 #     print(i["payload"])
