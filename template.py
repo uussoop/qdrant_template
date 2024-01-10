@@ -35,7 +35,11 @@ def format_embedding_to_db_structure(data, payload, collection_name):
         structured = []
 
         try:
-            vc = qd_client.get_collection(collection_name=collection_name).vectors_count
+            vc = (
+                qd_client.get_collection(collection_name=collection_name).vectors_count
+                + 1
+            )
+
         except:
             vc = 0
         for d in data1:
@@ -53,7 +57,7 @@ def format_embedding_to_db_structure(data, payload, collection_name):
         return None
 
 
-def insert_data(collection_name, payload, data):
+def insert_data(collection_name, data, payload):
     points = format_embedding_to_db_structure(data, payload, collection_name)
     if collection_name not in [c.name for c in qd_client.get_collections().collections]:
         qd_client.recreate_collection(
@@ -95,8 +99,10 @@ def search_data(search_term, collection_name, limit=3):
 # if __name__ == "__main__":
 # example usage
 # before using : docker compose up -d
-# insert_data("test",[{"data" "data representation"}],[ "data to be embeded"])
-# s = search_data(" BCNGarden project", "articles")
+# quastion = ""
+# answer = ""
+# insert_data("test", [quastion], [{"data": answer}])
+# s = search_data(quastion, "test")
 # for i in s:  # type: ignore
 #     print(i["payload"])
 #     break
