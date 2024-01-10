@@ -31,7 +31,7 @@ The main functions are:
 To insert data:
 
 ```python
-insert_data("test", ["doc1", "doc2"], ["Text for doc1", "Text for doc2"]) 
+insert_data("test", [{"data":"doc1"}, {"data":"doc2"}], ["Text for doc1", "Text for doc2"]) 
 ```
 
 To search:

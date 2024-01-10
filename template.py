@@ -1,5 +1,6 @@
 from re import template
 import qdrant_client
+from qdrant_client import QdrantClient
 import openai
 from qdrant_client.http.models import PointStruct
 from qdrant_client.http import models
@@ -12,6 +13,12 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 # default host if not changed inside the docker-compose file
 QDRANT_HOST = "http://0.0.0.0:6333/"
+
+
+# if you would like to run without docker use below
+# qd_client = QdrantClient(":memory:")
+# # or
+# qd_client = QdrantClient(path="path/to/db")
 
 qd_client = qdrant_client.QdrantClient(url=QDRANT_HOST)
 
@@ -88,7 +95,7 @@ def search_data(search_term, collection_name, limit=3):
 # if __name__ == "__main__":
 # example usage
 # before using : docker compose up -d
-# insert_data("test",[ "data representation"],[ "data to be embeded"])
+# insert_data("test",[{"data" "data representation"}],[ "data to be embeded"])
 # s = search_data(" BCNGarden project", "articles")
 # for i in s:  # type: ignore
 #     print(i["payload"])
